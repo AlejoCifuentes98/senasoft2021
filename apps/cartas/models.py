@@ -8,7 +8,7 @@ class Tipo(models.Model):
 
 class Cartas(models.Model):
     nombre = models.CharField(max_length=80)
-    tipo   = models.ForeignKey()
+    tipo   = models.ForeignKey(Tipo, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.nombre)
     
