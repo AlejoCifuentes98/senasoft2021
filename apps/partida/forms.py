@@ -1,5 +1,5 @@
 from django import forms
-
+from apps.partida.models import Partida
 class crear_partida_form(forms.ModelForm):
     class Meta:
         model = Partida
