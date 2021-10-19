@@ -1,1 +1,0 @@
-"# senasoft2021django" 
