@@ -1,0 +1,37 @@
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Quien</th>
+            <th>Notas</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for des in lista_desarrollador%}
+            <tr>
+                <td>{{des}}</td>
+                <td>{{}}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td>Modulo</td>
+                <td></td>
+            </tr>
+        {% for mod in lista_modulo%}
+            <tr>
+                <td>{{mod}}</td>
+                <td>{{}}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td>Tipo de error</td>
+                <td></td>
+            </tr>
+        {% for err in lista_error%}
+            <tr>
+                <td>{{err}}</td>
+                <td>{{}}</td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
