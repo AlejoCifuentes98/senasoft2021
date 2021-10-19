@@ -11,3 +11,9 @@ class Cartas(models.Model):
     tipo   = models.ForeignKey()
     def __str__(self):
         return str(self.nombre)
+    
+class Cartas_Ocultas(models.Model):
+    carta_des = models.PositiveSmallIntegerField()
+    carta_mod = models.PositiveSmallIntegerField()
+    carta_err = models.PositiveSmallIntegerField()
+    
