@@ -1,5 +1,5 @@
 from django import forms
-from apps.partida.models import Partida, Jugadores
+from apps.partida.models import Partida, Jugadores, Anotacion
 class jugador_form(forms.ModelForm):
     class Meta:
         model = Jugadores
@@ -7,9 +7,11 @@ class jugador_form(forms.ModelForm):
 
 
 class crear_partida_form(forms.ModelForm):
-    class Meta:
-        model = Partida
-        exclude = ['codigo_ingreso']
+   class Meta:
+       model = Partida
+       fields = '__all__'
+       
+
 
 
 
