@@ -1,8 +1,8 @@
 from django import forms
-from apps.partida.models import Partida, Jugadores, Anotacion
+from apps.partida.models import Partida, Jugador, Anotacion
 class jugador_form(forms.ModelForm):
     class Meta:
-        model = Jugadores
+        model = Jugador
         fields = '__all__'
 
 
