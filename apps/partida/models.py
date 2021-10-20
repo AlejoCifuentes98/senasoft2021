@@ -23,9 +23,9 @@ class Jugador(models.Model):
 #Modelo de la partida
 class Partida(models.Model):
     codigo_ingreso = models.CharField(max_length=5) #codigo para unirse a la partida
-    carta_des = models.PositiveIntegerField() #Carta a ocultar de los desarrolladores
-    carta_mod = models.PositiveIntegerField() #Carta a ocultar de los modulos
-    carta_err = models.PositiveIntegerField() #Carta a ocultar de los errores
+    carta_des = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los desarrolladores
+    carta_mod = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los modulos
+    carta_err = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los errores
 
 #Modelo para almacenar los datos de la partida  
 
@@ -33,6 +33,7 @@ class Registro(models.Model):
     jugador_numero = models.CharField(max_length=20, choices=jugador_num)
     jugador = models.ForeignKey(Jugador, on_delete=models.PROTECT) #llave foranea de la tabla Jugador
     partida = models.ForeignKey(Partida, on_delete=models.PROTECT) #llave foranea de la tabla Partida
+    cartas = models.CharField(max_length=20, null=True, blank=True)
     def __str__(self):
         return self.jugador.nombre + ' ' +self.partida.codigo + ' ' + self.jugador_numero
 
@@ -42,7 +43,6 @@ class Turno(models.Model):
     carta_mod = models.CharField(max_length=20)
     carta_err = models.CharField(max_length=20)
     
-    cartas = models.CharField(max_length=20, null=True, blank=True)
     carta_correcta = models.PositiveIntegerField(null=True, blank=True)
 
     respuesta_jugador_1 = models. PositiveIntegerField(null=True, blank=True)
