@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from apps.partida.forms import crear_partida_form, ingresar_partida_form
+from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form
+from random import randint
 
 #Vistas de la aplicación "partida"
 def inicio_view(request):
@@ -7,12 +8,25 @@ def inicio_view(request):
 
 def partida_crear_view(request):
     if request.method == 'POST':
-        formulario = crear_partida_form(request.POST)
-        if formulario.is_valid():
-            formulario.save
+        form_j = jugador_form(request.POST)
+        form_p = crear_partida_form(request.POST)
+        if form_j.is_valid() and form_p.is_valid():
+            
+            p = form_p.save(commit=False)
+            form_j.save() 
+            
+                
+            r = (randint(0, 10000000000))
+            c= hex(r) [2:]
+            codigo = ("{:.5}".format(c))
+            p.codigo_ingreso = codigo
+            p.save()    
             print("Partida creada con exito")
+             
+             
     else: 
-        formulario = ingresar_partida_form()
+        form_j = jugador_form(request.POST)
+        form_p = crear_partida_form(request.POST)
         return render(request, 'partida/partida_crear.html',locals())        
     return render(request, 'partida/partida_crear.html',locals())
 
