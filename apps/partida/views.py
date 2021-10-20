@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form
 from apps.partida.models import Partida, Jugador
-from random import randint
+
+from random import randint # Funcion para generar los hexadecimales
 
 #Vistas de la aplicación "partida"
 def inicio_view(request):
