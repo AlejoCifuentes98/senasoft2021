@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form
 from apps.partida.models import Partida, Jugador, Registro, Turno, Tablero
+from apps.cartas.models import Cartas
 
 from random import randint # Funcion para generar los hexadecimales
 
@@ -16,8 +17,18 @@ def partida_crear_view(request):
             r = (randint(0, 10000000000))#Tomar rangos de numeros desde el 0 hasta un valor en especifico
             c= hex(r) [2:] #Se pasa los numeros a hexadecimal, ademas se quita el prefijo "0x" el cual viene con todos los numeros hexadecimales
             codigo = ("{:.5}".format(c)) #formatear el hexadecimal para obtener solo 5 digitos
-            partida = Partida.objects.create(codigo_ingreso=codigo) #se captura l codigo y se pasa como parametro a la tabla Partida   
-            Registro.objects.create(jugador=jugador, partida=partida)
+            
+            #Obtiene el primer objecto que se obtiene de un orden random de cada tipo
+            modulo = Cartas.objects.filter(tipo__nombre = "mod").order_by('?').first()
+            error = Cartas.objects.filter(tipo__nombre = "err").order_by('?').first()
+            desarrollador = Cartas.objects.filter(tipo__nombre = "dev").order_by('?').first()
+
+            partida = Partida.objects.create(
+                codigo_ingreso=codigo,#se captura l codigo y se pasa como parametro a la tabla Partida  
+                carta_err=error.id, 
+                carta_mod=modulo.id,
+                carta_des=desarrollador.id,)  
+            Registro.objects.create(jugador=jugador, partida=partida, jugador_numero='jugador 1')
             
     else:
         form_j = jugador_form() #Si es un metodo Get, se pintará el formulario para ingresar el nombre del jugador
@@ -25,7 +36,17 @@ def partida_crear_view(request):
     return render(request, 'partida/partida_crear.html',locals())
 
 def partida_ingresar_view(request):
+    if request.method == 'POST':
+        form_i=ingresar_partida_form(request.POST)
+        if form_i.is_valid():
+            nom = form_i.cleaned_data['nombre']
+            cod = form_i.cleaned_data['codigo']
+            jug = Jugador.object.create(nombre=nom)
+            juego = Partida.objects.get(codigo_ingreso=cod)
+            Registro.objects.create(jugador= jug.id, partida=juego.id)
 
+    else:
+        form_i=ingresar_partida_form()
     return render(request, 'partida/partida_ingresar.html',locals())
 
 def partida_view(request):

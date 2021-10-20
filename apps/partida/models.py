@@ -25,15 +25,10 @@ class Jugador(models.Model):
 #Modelo de la partida
 class Partida(models.Model):
     codigo_ingreso = models.CharField(max_length=5) #codigo para unirse a la partida
-<<<<<<< HEAD
     carta_des = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los desarrolladores
     carta_mod = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los modulos
     carta_err = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los errores
-=======
-    # carta_des = models.PositiveIntegerField() #Carta a ocultar de los desarrolladores
-    # carta_mod = models.PositiveIntegerField() #Carta a ocultar de los modulos
-    # carta_err = models.PositiveIntegerField() #Carta a ocultar de los errores
->>>>>>> 721e17489a6c9862fea61da37904241ac4f68d2e
+    
 
 #Modelo para almacenar los datos de la partida  
 
