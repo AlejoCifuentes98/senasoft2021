@@ -7,7 +7,7 @@ urlpatterns = [
     path('partida/ingresar', partida_ingresar_view, name='partida_ingresar'),
     
     #seccion de partida iniciada
-    path('partida/<int:id_jugador>/', partida_view, name='partida'),
+    path('partida/', partida_view, name='partida'),
     path('preguntar/', preguntar_view, name='preguntar'),
     path('acusar/', acusar_view, name='acusar'),
 ]

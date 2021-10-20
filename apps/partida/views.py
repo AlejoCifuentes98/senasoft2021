@@ -17,11 +17,8 @@ def partida_crear_view(request):
             c= hex(r) [2:] #Se pasa los numeros a hexadecimal, ademas se quita el prefijo "0x" el cual viene con todos los numeros hexadecimales
             codigo = ("{:.5}".format(c)) #formatear el hexadecimal para obtener solo 5 digitos
             partida = Partida.objects.create(codigo_ingreso=codigo) #se captura l codigo y se pasa como parametro a la tabla Partida   
-            partida.save() #guardamos el objeto de partida creado 
-            registro = Registro.objects.create()
-            registro.jugador = jugador
-            registro.partida = partida
-            registro.save() #guardamos el objeto de partida creado 
+            Registro.objects.create(jugador=jugador, partida=partida)
+            
     else:
         form_j = jugador_form() #Si es un metodo Get, se pintará el formulario para ingresar el nombre del jugador
         return render(request, 'partida/partida_crear.html',locals())        
@@ -31,8 +28,9 @@ def partida_ingresar_view(request):
 
     return render(request, 'partida/partida_ingresar.html',locals())
 
-def partida_view(request, id_jugador):
-    jugador = Jugador.objects.get(id = id_jugador)
+def partida_view(request):
+    jugador = Jugador.objects.get(jugador=request.user.id)
+    registro = Registro.object.get(jugador = jugador)
     return render(request, 'partida/partida.html')
 
 def preguntar_view(request):

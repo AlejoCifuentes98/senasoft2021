@@ -4,6 +4,7 @@ class jugador_form(forms.ModelForm):
     class Meta:
         model = Jugador
         fields = '__all__'
+        exclude =['usuario']
 
 
 class crear_partida_form(forms.ModelForm):

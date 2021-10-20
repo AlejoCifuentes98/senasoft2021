@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 #choices para los jugadores
 jugador_num = (
@@ -17,15 +18,16 @@ tipo_turno = (
 #Modelo para almacenar los jugadores de la partida    
 class Jugador(models.Model):
     nombre = models.CharField(max_length=100)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.nombre
 
 #Modelo de la partida
 class Partida(models.Model):
     codigo_ingreso = models.CharField(max_length=5) #codigo para unirse a la partida
-    carta_des = models.PositiveIntegerField() #Carta a ocultar de los desarrolladores
-    carta_mod = models.PositiveIntegerField() #Carta a ocultar de los modulos
-    carta_err = models.PositiveIntegerField() #Carta a ocultar de los errores
+    # carta_des = models.PositiveIntegerField() #Carta a ocultar de los desarrolladores
+    # carta_mod = models.PositiveIntegerField() #Carta a ocultar de los modulos
+    # carta_err = models.PositiveIntegerField() #Carta a ocultar de los errores
 
 #Modelo para almacenar los datos de la partida  
 
