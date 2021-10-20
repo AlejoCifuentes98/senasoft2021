@@ -26,8 +26,8 @@ def partida_crear_view(request):
              
              
     else: 
-        form_j = jugador_form(request.POST)
-        form_p = crear_partida_form(request.POST)
+        form_j = jugador_form()
+        
         
         return render(request, 'partida/partida_crear.html',locals())        
     return render(request, 'partida/partida_crear.html',locals())
