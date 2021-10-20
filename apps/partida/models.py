@@ -1,10 +1,14 @@
 from django.db import models
+
+#choices para los jugadores
 jugador_num = (
     ('jugador 1','jugador 1'),
     ('jugador 2','jugador 2'),
     ('jugador 3','jugador 3'),
     ('jugador 4','jugador 4'),
 )
+
+#Choices para los tipos de turnos
 tipo_turno = (
     ('preguntar','preguntar'),
     ('acusar','acusar'),
@@ -38,7 +42,7 @@ class Turno(models.Model):
     carta_mod = models.CharField(max_length=20)
     carta_err = models.CharField(max_length=20)
     
-    cartas = models.Charfield(max_length=20, null=True, blank=True)
+    cartas = models.CharField(max_length=20, null=True, blank=True)
     carta_correcta = models.PositiveIntegerField(null=True, blank=True)
 
     respuesta_jugador_1 = models. PositiveIntegerField(null=True, blank=True)
@@ -53,9 +57,11 @@ class Turno(models.Model):
     def __str__(self):
         return self.registro.jugador.nombre+ ' '+self.carta_des+' '+self.carta_mod+' '+self.carta_err
 
+#Modelo para el Tablero
 class Tablero(models.Model):
     registro = models.ForeignKey(Registro, on_delete=models.PROTECT)
-
+    
+    #cartas tipo desarrollador
     carta_des_1 = models.CharField(max_length=50, null=True, blank=True)
     carta_des_2 = models.CharField(max_length=50, null=True, blank=True)
     carta_des_3 = models.CharField(max_length=50, null=True, blank=True)
@@ -64,6 +70,7 @@ class Tablero(models.Model):
     carta_des_6 = models.CharField(max_length=50, null=True, blank=True)
     carta_des_7 = models.CharField(max_length=50, null=True, blank=True)
     
+    #Cartas tipo modulos
     carta_mod_1 = models.CharField(max_length=50, null=True, blank=True)
     carta_mod_2 = models.CharField(max_length=50, null=True, blank=True)
     carta_mod_3 = models.CharField(max_length=50, null=True, blank=True)
@@ -71,7 +78,7 @@ class Tablero(models.Model):
     carta_mod_5 = models.CharField(max_length=50, null=True, blank=True)
     carta_mod_6 = models.CharField(max_length=50, null=True, blank=True)
     
-    
+    #cartas tipo errores
     carta_err_1 = models.CharField(max_length=50, null=True, blank=True)
     carta_err_2 = models.CharField(max_length=50, null=True, blank=True)
     carta_err_3 = models.CharField(max_length=50, null=True, blank=True)

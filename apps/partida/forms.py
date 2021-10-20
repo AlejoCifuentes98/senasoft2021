@@ -1,5 +1,5 @@
 from django import forms
-from apps.partida.models import Partida, Jugador, Anotacion
+from apps.partida.models import Partida, Jugador
 class jugador_form(forms.ModelForm):
     class Meta:
         model = Jugador
