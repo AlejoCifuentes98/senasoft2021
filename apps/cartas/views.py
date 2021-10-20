@@ -23,10 +23,6 @@ def cartas_ocultas(request):
     jugador2 = lts_1[len(lts_1)//2:]
     jugador3 = lts_2[:len(lts_2)//2]
     jugador4 = lts_2[len(lts_2)//2:]
-        
-
-    print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-   
     
     print(jugador1)
     print(jugador2)

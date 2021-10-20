@@ -4,6 +4,14 @@ from django.db import models
 class Jugadores(models.Model):
     nombre = models.CharField(max_length=100)
 
-#Modelo para almacenar los datos de la partida        
 class Partida(models.Model):
-    jugadores = models.ForeignKey(Jugadores, on_delete=models.CASCADE)
+    codigo_ingreso = models.CharField(max_length=5)
+    carta_des = models.PositiveSmallIntegerField()
+    carta_mod = models.PositiveSmallIntegerField()
+    carta_err = models.PositiveSmallIntegerField()
+
+class Anotacion(models.Model):
+    jugador = models.ForeignKey(Jugadores, on_delete=models.CASCADE)
+    partida = models.ForeignKey(Partida, on_delete=models.CASCADE)
+ 
+#Modelo para almacenar los datos de la partida        
