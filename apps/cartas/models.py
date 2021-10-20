@@ -1,4 +1,5 @@
 from django.db import models
+from apps.partida.models import Jugadores
 
 #Almacena los tiposde cartas
 class Tipo(models.Model):
@@ -17,4 +18,5 @@ class Cartas_Ocultas(models.Model):
     carta_des = models.PositiveSmallIntegerField()
     carta_mod = models.PositiveSmallIntegerField()
     carta_err = models.PositiveSmallIntegerField()
+
     

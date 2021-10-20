@@ -1,3 +1,3 @@
-# Encuentra el error
+# CardBug
 # senasoft2021django 
 ## find the bug  
