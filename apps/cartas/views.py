@@ -1,24 +1,43 @@
-from django.shortcuts import render
-from .models import Cartas, Cartas_Ocultas
-import random
+from django.shortcuts import redirect, render
+from .models import Cartas
 
-def cartas_ocultas():
-    #Cuenta el numero de cartas existentes por cada tipo
-    numero_modulo = Cartas.objects.filter(tipo__nombre = "Modulo").count()
-    numero_error = Cartas.objects.filter(tipo__nombre = "Error").count()
-    numero_desarrollador = Cartas.objects.filter(tipo__nombre = "Desarrollador").count()
-    #Guarda un número random entre el 1 y el numero total de cartas en cada tipo
-    n_modulo = random.randint(1,numero_modulo)
-    n_error = random.randint(1,numero_error)
-    n_desarrollador = random.randint(1,numero_desarrollador)
-    #Busca el la base de datos el número ramdon igualandolo al id
-    modulo = Cartas.objects.filter(id = n_modulo)
-    error = Cartas.objects.filter(id = n_error)
-    desarrollador = Cartas.objects.filter(id = n_desarrollador)
-    #Crea objecto con las caras ocultas
-    Cartas_Ocultas.objects.Create(carta_des=desarrollador.id, carta_mod=modulo.id, carta_err=error.id)
+
+def cartas_ocultas(request):
+    #Obtiene el primer objecto que se obtiene de un orden random de cada tipo
+    modulo = Cartas.objects.filter(tipo__nombre = "mod").order_by('?').first()
+    error = Cartas.objects.filter(tipo__nombre = "err").order_by('?').first()
+    desarrollador = Cartas.objects.filter(tipo__nombre = "dev").order_by('?').first()
+    #Excluye las cartas que van a hacer las ocultas
+    cartas_random = Cartas.objects.exclude(id = modulo.id).exclude( id = error.id).exclude(id = desarrollador.id).order_by('?')
+    lts = []
+    jugador1 = []
+    jugador2 = []
+    jugador3 = []
+    jugador4 = []
+    
+    for i in cartas_random:
+        lts.append(i)
+    lts_1 = lts[:len(lts)//2]
+    lts_2 = lts[len(lts)//2:]
+    jugador1 = lts_1[:len(lts_1)//2]
+    jugador2 = lts_1[len(lts_1)//2:]
+    jugador3 = lts_2[:len(lts_2)//2]
+    jugador4 = lts_2[len(lts_2)//2:]
+    
+    print(jugador1)
+    print(jugador2)
+    print(jugador3)
+    print(jugador4)
+
+    return redirect('/')
+
 
 def lista_(request):
-    lista_modulo = Cartas.objects.filter(tipo__nombre = "Modulo")
-    lista_error = Cartas.objects.filter(tipo__nombre = "Error")
-    lista_desarrollador = Cartas.objects.filter(tipo__nombre = "Desarrollador")
+    lista_modulo = Cartas.objects.filter(tipo__nombre = "mod")
+    lista_error = Cartas.objects.filter(tipo__nombre = "err")
+    lista_desarrollador = Cartas.objects.filter(tipo__nombre = "dev")
+    return render(request, 'cartas/lista_cartas.html',locals())
+
+def cartas_juego():
+    pass
+

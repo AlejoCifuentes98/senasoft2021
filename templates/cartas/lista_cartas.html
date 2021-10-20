@@ -6,10 +6,10 @@
         </tr>
     </thead>
     <tbody>
-        {% for des in lista_desarrollador%}
+        {% for des in lista_desarrollador %}
             <tr>
-                <td>{{des}}</td>
-                <td>{{}}</td>
+                <td>{{des.nombre}}</td>
+                <td></td>
             </tr>
         {% endfor %}
             <tr>
@@ -19,7 +19,7 @@
         {% for mod in lista_modulo%}
             <tr>
                 <td>{{mod}}</td>
-                <td>{{}}</td>
+                <td></td>
             </tr>
         {% endfor %}
             <tr>
@@ -29,7 +29,7 @@
         {% for err in lista_error%}
             <tr>
                 <td>{{err}}</td>
-                <td>{{}}</td>
+                <td></td>
             </tr>
         {% endfor %}
 

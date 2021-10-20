@@ -6,6 +6,9 @@ class Jugadores(models.Model):
 
 class Partida(models.Model):
     codigo_ingreso = models.CharField(max_length=5)
+    carta_des = models.PositiveSmallIntegerField()
+    carta_mod = models.PositiveSmallIntegerField()
+    carta_err = models.PositiveSmallIntegerField()
 
 class Anotacion(models.Model):
     jugador = models.ForeignKey(Jugadores, on_delete=models.CASCADE)
