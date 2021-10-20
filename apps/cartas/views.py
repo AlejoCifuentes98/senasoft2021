@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Cartas, Cartas_Ocultas
+from .models import Cartas
 
 
 def cartas_ocultas(request):
