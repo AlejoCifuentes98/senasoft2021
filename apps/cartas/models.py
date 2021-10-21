@@ -1,5 +1,5 @@
 from django.db import models
-from apps.partida.models import Jugador
+
 
 #Almacena los tiposde cartas
 class Tipo(models.Model):

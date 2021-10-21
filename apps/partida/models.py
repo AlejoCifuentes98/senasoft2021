@@ -21,10 +21,6 @@ partida_estado =(
 )
 
 #Modelo para almacenar los jugadores de la partida    
-class Jugador(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.nombre
 
 #Modelo de la partida
 class Partida(models.Model):
@@ -32,14 +28,14 @@ class Partida(models.Model):
     carta_des = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los desarrolladores
     carta_mod = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los modulos
     carta_err = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los errores
-    estado = models.CharField(max_length=50, choices=partida_estado, default='activa')
+    #estado = models.CharField(max_length=50, choices=partida_estado, default='activa')
 
 #Modelo para almacenar los datos de la partida  
 
 class Registro(models.Model):
     jugador_numero = models.CharField(max_length=20, choices=jugador_num)
     cartas = models.CharField(max_length=20, null=True, blank=True)
-    jugador = models.ForeignKey(Jugador, on_delete=models.PROTECT) #llave foranea de la tabla Jugador
+    jugador = models.ForeignKey(User, on_delete=models.PROTECT) #llave foranea de la tabla Jugador
     partida = models.ForeignKey(Partida, on_delete=models.PROTECT) #llave foranea de la tabla Partida
     def __str__(self):
         return self.jugador.nombre + ' ' +self.partida.codigo + ' ' + self.jugador_numero
