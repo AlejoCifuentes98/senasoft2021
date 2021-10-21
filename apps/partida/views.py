@@ -82,16 +82,22 @@ def perfil_view(request):
     jugador = User.objects.get(id=request.user.id)
     registros = Registro.objects.filter(jugador = jugador)
     return render(request, 'partida/perfil.html',locals())
-def partida_ingresar_view(request):
 
+def partida_ingresar_view(request):
+    jugador = User.objects.get(id=request.user.id)
+    
     if request.method == 'POST':
         form_i=ingresar_partida_form(request.POST)
         if form_i.is_valid():
-            nom = form_i.cleaned_data['nombre']
-            cod = form_i.cleaned_data['codigo']
-            jug = User.object.create(nombre=nom)
-            juego = Partida.objects.get(codigo_ingreso=cod)
-            Registro.objects.create(jugador= jug.id, partida=juego.id)
+            codigo = form_i.cleaned_data['codigo']
+            try:
+                partida = Partida.objects.get(codigo_ingreso=codigo).count()
+                r = Registro()
+                r.jugador=jugador
+                r.partida = partida
+            except:
+                msj =('Codigo no valido')
+            
 
     else:
         form_i=ingresar_partida_form()
