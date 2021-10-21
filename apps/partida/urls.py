@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.partida.views import inicio_view, partida_crear_view, partida_ingresar_view, partida_view, preguntar_view, acusar_view, registro_view, login_view, logout_view, perfil_view, turnos_view
+from apps.partida.views import inicio_view, partida_crear_view, partida_ingresar_view, partida_view, preguntar_view, acusar_view, registro_view, login_view, logout_view, perfil_view
 urlpatterns = [
     #urls de la aplicación "partida"
     path('', inicio_view, name='inicio'),

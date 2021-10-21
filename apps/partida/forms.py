@@ -1,12 +1,17 @@
 from django import forms
-from django.contrib.auth.models import User
-from apps.partida.models import Partida, Turno
+from apps.partida.models import Partida, Jugador, Turno
 from apps.cartas.models import Cartas
+from django.contrib.auth.models import User
 tipo_turno = (
     ('preguntar','preguntar'),
     ('acusar','acusar'),)
-
-
+from django.contrib.auth.models import User
+from apps.partida.models import Partida, Jugador
+class jugador_form(forms.ModelForm):
+    class Meta:
+        model = Jugador
+        fields = '__all__'
+        exclude =['usuario']
 
 class crear_partida_form(forms.ModelForm):
    class Meta:
@@ -43,6 +48,11 @@ class ingresar_partida_form(forms.Form):
     nombre = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     codigo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
         
+class turno_form(forms.Form):
+    desa = forms.ModelChoiceField(label='Desarrollador',queryset= Cartas.objects.filter(tipo__nombre = "dev"))
+    erro = forms.ModelChoiceField(label='Error',queryset= Cartas.objects.filter(tipo__nombre = "err"))
+    modu = forms.ModelChoiceField(label='Modulo',queryset= Cartas.objects.filter(tipo__nombre = "mod"))
+    tipo = forms.ChoiceField(choices=tipo_turno, label='Tipo de jugada')
 
 class registro_form(forms.Form):
     username   = forms.CharField(label='Nombre de usuario', widget=forms.TextInput)
@@ -68,9 +78,3 @@ class registro_form(forms.Form):
 class login_form(forms.Form):
     username   = forms.CharField(label='Usuario', widget=forms.TextInput)
     clave = forms.CharField(label='Contraseña', widget=forms.PasswordInput(render_value=False))
-
-class turno_form(forms.Form):
-    desa = forms.ModelChoiceField(label='Desarrollador',queryset= Cartas.objects.filter(tipo__nombre = "dev"))
-    erro = forms.ModelChoiceField(label='Error',queryset= Cartas.objects.filter(tipo__nombre = "err"))
-    modu = forms.ModelChoiceField(label='Modulo',queryset= Cartas.objects.filter(tipo__nombre = "mod"))
-    tipo = forms.ChoiceField(choices=tipo_turno, label='Tipo de jugada')
