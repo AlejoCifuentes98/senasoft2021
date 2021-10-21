@@ -95,10 +95,10 @@ def partida_ingresar_view(request):
                     r.jugador_numero= 'jugador 3'    
                 elif registrados ==3:
                     r.jugador_numero= 'jugador 4'
+                if registrados <=4:       
+                    r.save() 
                 else:
-                    jsm='Lo sentimos, estamos completos'       
-                r.save() 
-                 
+                    jsm='Lo sentimos, estamos completos'
             except:
                 msj =('Codigo no valido')
 
