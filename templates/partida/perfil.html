@@ -19,25 +19,21 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">fecha y hora</th>
-                            <th scope="col">Descripción de la atención</th>
-                            <th scope="col">Medico</th>
-    
-    
+                            <th scope="col">Numero de jugador</th>
+                            <th scope="col">Codgio de partida</th>    
                             <th scope="col">Detalles</th>
                         </tr>
                     </thead>
     
-                    {% if atenciones %}
+                    {% if registros %}
                     <tbody>
     
     
-                        {% for i in atenciones %}
+                        {% for i in registros %}
     
                         <tr>
-                            <th scope="row">{{ i.fecha_atencion }}</th>
-                            <td>{{ i.descripcion }}</td>
-                            <td>{{ i.descripcion }}</td>
+                            <th scope="row">{{ i.jugador_numero }}</th>
+                            <td>{{ i.partida.codigo_ingreso }}</td>
                             <td> </td>
                             <td><a typpe="button" class="btn btn-primary" href="{% url 'historial' id_atencion=i.id %}"></a></td>
     

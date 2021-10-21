@@ -94,7 +94,7 @@ def logout_view(request):
 
 def perfil_view(request):
     jugador = User.objects.get(id=request.user.id)
-    partidas = Registro.objects.filter() 
+    registros = Registro.objects.filter(jugador = jugador.id) 
     return render(request, 'partida/perfil.html',locals())
 def partida_ingresar_view(request):
     if request.method == 'POST':
@@ -110,10 +110,16 @@ def partida_ingresar_view(request):
         form_i=ingresar_partida_form()
     return render(request, 'partida/partida_ingresar.html',locals())
 
+def partida_detalles_view(request, id_partida):
+    partida = Partida.objects.get(id = id_partida)
+    return render(request, 'partida/detalles.html', locals())
+
 def partida_view(request):
     jugador = Jugador.objects.get(jugador=request.user.id)
     # registro = Registro.object.get(jugador = jugador)
     return render(request, 'partida/partida.html')
+
+
 
 def preguntar_view(request):
     return render(request, 'partida/preguntar.html')

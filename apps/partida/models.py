@@ -15,6 +15,11 @@ tipo_turno = (
     ('acusar','acusar'),
 )
 
+partida_estado =(
+    ('activa', 'activa'),
+    ('finalizada', 'finalizada'),
+)
+
 #Modelo para almacenar los jugadores de la partida    
 class Jugador(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -27,7 +32,7 @@ class Partida(models.Model):
     carta_des = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los desarrolladores
     carta_mod = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los modulos
     carta_err = models.PositiveIntegerField(blank=True, null=True) #Carta a ocultar de los errores
-    
+    estado = models.CharField(max_length=50, choices=partida_estado, default='activa')
 
 #Modelo para almacenar los datos de la partida  
 
