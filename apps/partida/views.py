@@ -115,6 +115,7 @@ def partida_ingresar_view(request):
     return render(request, 'partida/partida_ingresar.html',locals())
 
 def partida_detalle_view(request, id_registro):
+    registrados = Registro.objects.filter(partida=partida).count()
     registro =Registro.objects.get(id=id_registro)
    
     return render(request, 'partida/partida_detalle.html',locals())

@@ -1,8 +1,53 @@
 {% extends 'base.html' %}
  
  {% block contenido %}
-     <p>Hola {{ registro.jugador.username}}</p>
+     <h3>Hola <strong>{{ registro.jugador.username}}</strong></h3>
      <p>Tu codigo para que otros jugadores se puedan unir a la partida es el siguiente <strong> {{ registro.partida.codigo_ingreso }}</strong</p>
-
+        <div class="row mt-4">
+            <div class="col">
+                <h1>Tus partidas</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Numero de jugador</th>
+                                <th scope="col">Codgio de partida</th>    
+                                <th scope="col">Estado de la partida</th>
+                                <th scope="col">Detalles</th>
+                            </tr>
+                        </thead>
+        
+                        {% if registros %}
+                        <tbody>
+        
+        
+                            {% for i in registros %}
+        
+                            <tr>
+                                <th scope="row">{{ i.jugador_numero }}</th>
+                                <td>{{ i.partida.codigo_ingreso }}</td>
+                                <td>{{i.partida.estado}}</td>
+                                {% if i.partida.estado != 'activa'%}
+                                    <td><p>No se puede ingresar a esta poartida</p></td>
+                                {% else %}
+                                <td><a type="button" href="{% url 'partida_detalle' id_partida=i.id %}">Ver</a></td>
+                                {% endif %}
+        
+                            </tr>
+                            {% endfor %}
+        
+                        </tbody>
+                        {% else %}
+                        <div class="row">
+                            <div class="col justify-content-center">
+                                <br>
+                                <br>
+                                <h3>No existen registros en el momento</h3>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </table>
+            </div>
+        
+        </div>
  {% endblock contenido %}
      
