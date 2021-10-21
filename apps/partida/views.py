@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect
-<<<<<<< HEAD
-from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form, turno_form
-=======
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form, registro_form, login_form
->>>>>>> b5ae13ea61420e796c512ae2694f9295d1f5b209
 from apps.partida.models import Partida, Jugador, Registro, Turno, Tablero
 from apps.cartas.models import Cartas
 
