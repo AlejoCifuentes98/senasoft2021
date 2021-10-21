@@ -68,7 +68,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)#Cerrar sesión
-    return redirect ('/login/')
+    return redirect ('/')
 
 def perfil_view(request): 
     #Vista del perfil del jugador
@@ -86,7 +86,7 @@ def partida_ingresar_view(request):
             try: #errores personalizados
                 partida = Partida.objects.get(codigo_ingreso=codigo)#se valida que el codigo exista
                 if Registro.objects.filter(jugador=request.user.id, partida__codigo_ingreso=codigo).exists(): #Comparar que el usuario actual no esté vinculado a al mismo codigo más de una vez
-                    mensaje='Ya te encuentras en ésta partida' #Si ya está vinculado a la partida, se muestra el error.
+                    err_validacion ='Ya te encuentras en ésta partida' #Si ya está vinculado a la partida, se muestra el error.
                 else: #Si no está vinculado se genera un nuevo registro
                     registrados = Registro.objects.filter(partida=partida).count()#se cuentan los usuarios que ya estan registrados en la partida
                     r = Registro()#se crea un objeto
@@ -106,17 +106,23 @@ def partida_ingresar_view(request):
                         r.save()
                         return redirect('/perfil/') 
                     else:
-                        jsm='La partida ya cuenta con los 4 jugadores, no puedes ingresar' #Si es mayor a 4 se muestra el error
+                        err_partida='La partida ya cuenta con los 4 jugadores, no puedes ingresar' #Si es mayor a 4 se muestra el error
             except:
-                msj =('Codigo no valido') #Si el codigo no es valido, se muestra el error
+                err_codigo =('Codigo no valido') #Si el codigo no es valido, se muestra el error
 
     else:
-        form_i=ingresar_partida_form()
+        form_i=ingresar_partida_form() #metodo Get
     return render(request, 'partida/partida_ingresar.html',locals())
 
-def partida_view(request, id_partida ):
+def partida_detalle_view(request, id_partida):
+    registro =Registro.objects.get(id=id_partida)
+   
+    return render(request, 'partida/partida_detalle.html')
+
+def partida_view(request, id_partida):
     jugador = User.objects.get(jugador=request.user.id)
     partida = Partida.objects.get(id = id_partida)
+    registro =Registro.objects.filter(partida =partida, jugador=jugador)
     # registro = Registro.object.get(jugador = jugador)
     return render(request, 'partida/partida.html')
 
