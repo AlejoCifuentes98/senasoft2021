@@ -9,7 +9,7 @@
         <br>
         <div class="d-grid gap-2 d-md-block">
             <a type="button" class="btn btn-primary" href="{% url 'partida_crear' %}">crear partida</a>
-            <a type="button" class="btn btn-primary" href="#">Unirse a partida</a>
+            <a type="button" class="btn btn-primary" href="{% url 'partida_ingresar' %}">Unirse a partida</a>
            
         </div>
     </div>
@@ -39,7 +39,7 @@
                             {% if i.partida.estado != 'activa'%}
                                 <td><p>No se puede ingresar a esta poartida</p></td>
                             {% else %}
-                            <td><input type="submit" value="ingresar"></td>
+                            <td><a type="button" href="{% url 'partida_detalle' id_partida=i.id %}">Ver</a></td>
                             {% endif %}
     
                         </tr>
