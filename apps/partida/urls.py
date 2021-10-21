@@ -1,5 +1,9 @@
 from django.urls import path
+<<<<<<< HEAD
+from apps.partida.views import inicio_view, partida_crear_view, partida_ingresar_view, partida_view, preguntar_view, acusar_view, turnos_view
+=======
 from apps.partida.views import inicio_view, partida_crear_view, partida_ingresar_view, partida_view, preguntar_view, acusar_view, registro_view, login_view, logout_view, perfil_view
+>>>>>>> b5ae13ea61420e796c512ae2694f9295d1f5b209
 urlpatterns = [
     #urls de la aplicación "partida"
     path('', inicio_view, name='inicio'),
@@ -15,4 +19,5 @@ urlpatterns = [
     path('partida/', partida_view, name='partida'),
     path('preguntar/', preguntar_view, name='preguntar'),
     path('acusar/', acusar_view, name='acusar'),
+    path('prueba/', turnos_view, name='prueba' )
 ]

@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
+<<<<<<< HEAD
+from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form, turno_form
+=======
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form, registro_form, login_form
+>>>>>>> b5ae13ea61420e796c512ae2694f9295d1f5b209
 from apps.partida.models import Partida, Jugador, Registro, Turno, Tablero
 from apps.cartas.models import Cartas
 
@@ -127,3 +131,21 @@ def preguntar_view(request):
 def acusar_view(request):
 
     return render(request, 'partida/acusar.html')
+
+def turnos_view(request):
+    #jugador= Jugador.objects.get(jugador=id_jugador)
+    if request.method =='POST':
+        form_t=turno_form(request.POST)
+        if form_t.is_valid():
+            des = form_t.cleaned_data['desa']
+            err = form_t.cleaned_data['erro']
+            mod = form_t.cleaned_data['modu']
+            # Turno.objects.create(
+            #     carta_des=des.id, 
+            #     carta_err=err.id, 
+            #     carta_mod=mod.id,
+            #     #jugador_pregunta= jugador.id,
+            #     )
+    else:
+        form_t=turno_form()
+    return render(request, 'partida/prueba.html', locals())
