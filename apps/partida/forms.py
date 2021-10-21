@@ -1,12 +1,11 @@
 from django import forms
-from apps.partida.models import Partida, Jugador, Turno
+from apps.partida.models import Partida, Turno
 from apps.cartas.models import Cartas
 from django.contrib.auth.models import User
 tipo_turno = (
     ('preguntar','preguntar'),
     ('acusar','acusar'),)
-from django.contrib.auth.models import User
-from apps.partida.models import Partida, Jugador
+
 class jugador_form(forms.ModelForm):
     class Meta:
         model = Jugador

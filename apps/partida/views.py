@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from apps.partida.forms import crear_partida_form, ingresar_partida_form, jugador_form, registro_form, login_form
-from apps.partida.models import Partida, Jugador, Registro, Turno, Tablero
+from apps.partida.models import Partida, Registro, Turno, Tablero
 from apps.cartas.models import Cartas
 
 from random import randint # Funcion para generar los hexadecimales
@@ -13,7 +13,7 @@ def inicio_view(request):
 
 
 def partida_crear_view(request):
-    jugador = Jugador.objects.get(id=request.user.id)
+    jugador = User.objects.get(id=request.user.id)
     if request.method == 'POST': 
         form_p = crear_partida_form(request.POST)       
         if form_p.is_valid():
