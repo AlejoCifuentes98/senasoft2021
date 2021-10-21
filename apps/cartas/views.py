@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import Cartas
-from apps.partida.models import Partida
+from apps.partida.models import Partida, Registro, Tablero
 
 
 def cartas_ocultas(request,id_partida):
@@ -24,20 +24,31 @@ def cartas_ocultas(request,id_partida):
     
     for i in cartas_random:
         #Llena la lista lts
-        lts.append(i)
+        lts.append(i.id)
     #Divide la lista en 2
     lts_1 = lts[:len(lts)//2]
     lts_2 = lts[len(lts)//2:]
     #Divide la lista en 4
-    jugador1 = lts_1[:len(lts_1)//2]
-    jugador2 = lts_1[len(lts_1)//2:]
-    jugador3 = lts_2[:len(lts_2)//2]
-    jugador4 = lts_2[len(lts_2)//2:]
+    # jugador1 = lts_1[:len(lts_1)//2]
+    # jugador2 = lts_1[len(lts_1)//2:]
+    # jugador3 = lts_2[:len(lts_2)//2]
+    # jugador4 = lts_2[len(lts_2)//2:]
+
+    r = Registro.objects.filter(partida=partida.id, jugador_numero='jugador 1')
+    r.cartas = lts_1[:len(lts_1)//2]
     
-    print(jugador1)
-    print(jugador2)
-    print(jugador3)
-    print(jugador4)
+    r = Registro.objects.filter(partida=partida.id, jugador_numero='jugador 2')
+    r.cartas = lts_1[len(lts_1)//2:]
+    r = Registro.objects.filter(partida=partida.id, jugador_numero='jugador 3')
+    r.cartas = lts_2[:len(lts_2)//2]
+    r = Registro.objects.filter(partida=partida.id, jugador_numero='jugador 4')
+    r.cartas = lts_2[len(lts_2)//2:]
+    
+    
+    # print(jugador1)
+    # print(jugador2)
+    # print(jugador3)
+    # print(jugador4)
 
     opciones=[]
     lista =["22222", "queso", "help me", "banana", "1","3","4"]
