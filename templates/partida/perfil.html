@@ -21,6 +21,7 @@
                         <tr>
                             <th scope="col">Numero de jugador</th>
                             <th scope="col">Codgio de partida</th>    
+                            <th scope="col">Estado deña partida</th>
                             <th scope="col">Detalles</th>
                         </tr>
                     </thead>
@@ -34,9 +35,12 @@
                         <tr>
                             <th scope="row">{{ i.jugador_numero }}</th>
                             <td>{{ i.partida.codigo_ingreso }}</td>
-                            <td> </td>
-                            <td><a typpe="button" class="btn btn-primary" href="#"></a></td>
-    
+                            <td>{{i.partida.estado}}</td>
+                            {% if i.partida.estado != 'activa'%}
+                                <td><p>No se puede ingresar a esta poartida</p></td>
+                            {% else %}
+                            <td><input type="submit" value="ingresar"></td>
+                            {% endif %}
     
                         </tr>
                         {% endfor %}

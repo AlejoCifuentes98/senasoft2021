@@ -26,7 +26,7 @@ def partida_crear_view(request):
 
     partida = Partida()
     partida.codigo_ingreso=codigo#se captura el codigo y se pasa como parametro a la tabla Partida  
-    #partida.estado = 'activa'
+    partida.estado = 'activa'
     partida.save()
                 # carta_err=error.id, 
                 # carta_mod=modulo.id,
