@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
  
  {% block contenido %}
-     <p>Hola {{ registro.jugador_numero}}</p>
+     <p>Hola {{ registro.jugador.username}}</p>
      <p>Tu codigo para que otros jugadores se puedan unir a la partida es el siguiente <strong> {{ registro.partida.codigo_ingreso }}</strong</p>
 
  {% endblock contenido %}

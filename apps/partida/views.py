@@ -114,10 +114,10 @@ def partida_ingresar_view(request):
         form_i=ingresar_partida_form() #metodo Get
     return render(request, 'partida/partida_ingresar.html',locals())
 
-def partida_detalle_view(request, id_partida):
-    registro =Registro.objects.get(id=id_partida)
+def partida_detalle_view(request, id_registro):
+    registro =Registro.objects.get(id=id_registro)
    
-    return render(request, 'partida/partida_detalle.html')
+    return render(request, 'partida/partida_detalle.html',locals())
 
 def partida_view(request, id_partida):
     jugador = User.objects.get(jugador=request.user.id)

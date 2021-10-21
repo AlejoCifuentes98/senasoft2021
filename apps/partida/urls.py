@@ -10,7 +10,7 @@ urlpatterns = [
     path('perfil/', perfil_view, name='perfil'),
     path('partida/crear/', partida_crear_view, name='partida_crear'),
     path('partida/ingresar/', partida_ingresar_view, name='partida_ingresar'),
-    path('partida/detalle/<int:id_partida>', partida_detalle_view, name='partida_detalle'),
+    path('partida/detalle/<int:id_registro>', partida_detalle_view, name='partida_detalle'),
     #seccion de partida iniciada
     path('partida/', partida_view, name='partida'),
     path('preguntar/', preguntar_view, name='preguntar'),
