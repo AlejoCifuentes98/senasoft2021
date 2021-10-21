@@ -40,7 +40,6 @@ class login_form(forms.Form):
     password = forms.CharField(label='Contraseña', widget=forms.PasswordInput(render_value=False))
 
 class ingresar_partida_form(forms.Form):
-    nombre = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     codigo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
         
 class turno_form(forms.Form):

@@ -13,23 +13,15 @@ def inicio_view(request):
 
 
 def partida_crear_view(request):
-    jugador = User.objects.get(id=request.user.id)
+    #Vista para crear partida
+    jugador = User.objects.get(id=request.user.id) #Consulta el usuario conectado actualmente
     r = (randint(0, 10000000000))#Tomar rangos de numeros desde el 0 hasta un valor en especifico
     c= hex(r) [2:] #Se pasa los numeros a hexadecimal, ademas se quita el prefijo "0x" el cual viene con todos los numeros hexadecimales
-    codigo = ("{:.5}".format(c)) #formatear el hexadecimal para obtener solo 5 digitos
-            
-            #Obtiene el primer objecto que se obtiene de un orden random de cada tipo
-            # modulo = Cartas.objects.filter(tipo__nombre = "mod").order_by('?').first()
-            # error = Cartas.objects.filter(tipo__nombre = "err").order_by('?').first()
-            # desarrollador = Cartas.objects.filter(tipo__nombre = "dev").order_by('?').first()
-
+    codigo = ("{:.5}".format(c)) #formatear el hexadecimal para obtener solo 5 digitos y se captura en la variable codigo
     partida = Partida()
     partida.codigo_ingreso=codigo#se captura el codigo y se pasa como parametro a la tabla Partida  
-    partida.estado = 'activa'
-    partida.save()
-                # carta_err=error.id, 
-                # carta_mod=modulo.id,
-                # carta_des=desarrollador.id,)  
+    partida.estado = 'activa'#Se pasa el estado comno activa dado que apenas se crea la partida
+    partida.save()#Se guarda la partida
     
     Registro.objects.create(jugador_numero='jugador 1', jugador=jugador, partida=partida )
     return redirect('/perfil/')
@@ -69,42 +61,53 @@ def login_view(request):
                 return redirect('/perfil/')
             else:
                 msj = 'Sus credenciales son incorrectas, verifique e intente nuevamente.'
-    else: 
+    else:#metodo GET 
         form_l = login_form()                 
         return render(request, 'partida/login.html', locals())
     return render(request, 'partida/login.html', locals())
 
 def logout_view(request):
-    logout(request)
+    logout(request)#Cerrar sesión
     return redirect ('/login/')
 
-def perfil_view(request):
-    jugador = User.objects.get(id=request.user.id)
+def perfil_view(request): 
+    #Vista del perfil del jugador
+    jugador = User.objects.get(id=request.user.id) #Consulta el usuario conectado actualmente
     registros = Registro.objects.filter(jugador = jugador)
     return render(request, 'partida/perfil.html',locals())
 
 def partida_ingresar_view(request):
-    jugador = User.objects.get(id=request.user.id)
-    
+    #Vista para ingresar a una partida ya creada anteriormente
+    jugador = User.objects.get(id=request.user.id) #Consulta el usuario conectado actualmente
     if request.method == 'POST':
-        form_i=ingresar_partida_form(request.POST)
+        form_i=ingresar_partida_form(request.POST) #formulario para ingresar el codigo de la partida
         if form_i.is_valid():
-            codigo = form_i.cleaned_data['codigo']
+            codigo = form_i.cleaned_data['codigo'] #Captura codigo
             try:
-                partida = Partida.objects.get(codigo_ingreso=codigo).count()
+                partida = Partida.objects.get(codigo_ingreso=codigo)
+                registrados = Registro.objects.filter(partida=partida).count()
                 r = Registro()
                 r.jugador=jugador
                 r.partida = partida
+                if registrados == 1:
+                    r.jugador_numero= 'jugador 2'
+                elif registrados == 2:
+                    r.jugador_numero= 'jugador 3'    
+                elif registrados ==3:
+                    r.jugador_numero= 'jugador 4'
+                else:
+                    jsm='Lo sentimos, estamos completos'       
+                r.save() 
+                 
             except:
                 msj =('Codigo no valido')
-            
 
     else:
         form_i=ingresar_partida_form()
     return render(request, 'partida/partida_ingresar.html',locals())
 
 def partida_view(request):
-    jugador = Jugador.objects.get(jugador=request.user.id)
+    jugador = User.objects.get(jugador=request.user.id)
     # registro = Registro.object.get(jugador = jugador)
     return render(request, 'partida/partida.html')
 
