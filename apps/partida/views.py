@@ -85,20 +85,23 @@ def partida_ingresar_view(request):
             codigo = form_i.cleaned_data['codigo'] #Captura codigo
             try:
                 partida = Partida.objects.get(codigo_ingreso=codigo)
-                registrados = Registro.objects.filter(partida=partida).count()
-                r = Registro()
-                r.jugador=jugador
-                r.partida = partida
-                if registrados == 1:
-                    r.jugador_numero= 'jugador 2'
-                elif registrados == 2:
-                    r.jugador_numero= 'jugador 3'    
-                elif registrados ==3:
-                    r.jugador_numero= 'jugador 4'
-                if registrados <=4:       
-                    r.save() 
+                if Registro.objects.filter(jugador=request.user.id, partida__codigo_ingreso=codigo).exists():
+                    mensaje='no se puede mi rey'
                 else:
-                    jsm='Lo sentimos, estamos completos'
+                    registrados = Registro.objects.filter(partida=partida).count()
+                    r = Registro()
+                    r.jugador=jugador
+                    r.partida = partida
+                    if registrados == 1:
+                        r.jugador_numero= 'jugador 2'
+                    elif registrados == 2:
+                        r.jugador_numero= 'jugador 3'    
+                    elif registrados ==3:    
+                        r.jugador_numero= 'jugador 4'
+                    if registrados <=4:       
+                        r.save() 
+                    else:
+                        jsm='Lo sentimos, estamos completos'
             except:
                 msj =('Codigo no valido')
 

@@ -5,10 +5,13 @@
         {% csrf_token %}
         {{form_i.as_p}}
         
-       <button class="btn btn-primary" type="submit" >Crear</button>
+       <button class="btn btn-primary" type="submit" >Ingresar</button>
     </form>
-    {%if sjm %}
-        <p>{{sjm}}</p>
+    {%if jsm %}
+        <p>{{jsm}}</p>
+    {% endif %}    
+    {%if mensaje %}
+        <p>{{mensaje}}</p>
     {% endif %}    
     
 {% endblock contenido %}
