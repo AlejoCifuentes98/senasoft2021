@@ -103,7 +103,8 @@ def partida_ingresar_view(request):
 
                     #Condicional para guardar maximo 4 jugadores    
                     if registrados <=4: #si el numero de jugadores es meno o igual a 4 se puieden guardar los registros       
-                        r.save() 
+                        r.save()
+                        return redirect('/perfil/') 
                     else:
                         jsm='La partida ya cuenta con los 4 jugadores, no puedes ingresar' #Si es mayor a 4 se muestra el error
             except:
