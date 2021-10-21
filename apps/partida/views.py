@@ -26,15 +26,12 @@ def partida_crear_view(request):
 
     partida = Partida()
     partida.codigo_ingreso=codigo#se captura el codigo y se pasa como parametro a la tabla Partida  
+    #partida.estado = 'activa'
     partida.save()
                 # carta_err=error.id, 
                 # carta_mod=modulo.id,
                 # carta_des=desarrollador.id,)  
-    registro = Registro()
-    registro.jugador = jugador
-    registro.partida = partida
-    registro.jugador_numero = 'jugador 1'
-    registro.save 
+    Registro.objects.create(jugador_numero='jugador 1', jugador=jugador, partida=partida )
     return redirect('/perfil/')      
     
 
@@ -44,8 +41,8 @@ def registro_view(request):
         form_r =  registro_form(request.POST) #formulario para crear registrar 
     
         
-        #usuario en la tabla User de django y la tabla jugador
-        if form_r.is_valid() and form_j.is_valid(): #validar si el formulario es valido
+        #usuario en la tabla User de django 
+        if form_r.is_valid(): #validar si el formulario es valido
             username =  form_r.cleaned_data['username'] #username 
             clave_1 = form_r.cleaned_data['clave_1'] #Ingresar clave 1
             clave_2 = form_r.cleaned_data['clave_2'] #Ingresar clave 2
@@ -83,9 +80,9 @@ def logout_view(request):
     return redirect ('/login/')
 
 def perfil_view(request):
-    Jugador = User.objects.get(id=request.user.id)
+    jugador = User.objects.get(id=request.user.id)
     
-    registros = Registro.objects.filter(jugador = jugador.id) 
+    registros = Registro.objects.filter(jugador = jugador) 
     return render(request, 'partida/perfil.html',locals())
 def partida_ingresar_view(request):
     if request.method == 'POST':
