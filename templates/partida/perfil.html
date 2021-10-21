@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+    <div class="container">
+        <h1> Bienvenido(a) <strong>{{jugador.username}}</strong></h1>
+        <br>
+        <h3> qué deseas hacer?</h3>
+        <br>
+        <div class="d-grid gap-2 d-md-block">
+            <a type="button" class="btn btn-primary" href="{% url 'partida_crear' %}">crear partida</a>
+            <a type="button" class="btn btn-primary" href="#">Unirse a partida</a>
+           
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h1>Tus partidas</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">fecha y hora</th>
+                            <th scope="col">Descripción de la atención</th>
+                            <th scope="col">Medico</th>
+    
+    
+                            <th scope="col">Detalles</th>
+                        </tr>
+                    </thead>
+    
+                    {% if atenciones %}
+                    <tbody>
+    
+    
+                        {% for i in atenciones %}
+    
+                        <tr>
+                            <th scope="row">{{ i.fecha_atencion }}</th>
+                            <td>{{ i.descripcion }}</td>
+                            <td>{{ i.descripcion }}</td>
+                            <td> </td>
+                            <td><a typpe="button" class="btn btn-primary" href="{% url 'historial' id_atencion=i.id %}"></a></td>
+    
+    
+                        </tr>
+                        {% endfor %}
+    
+                    </tbody>
+                    {% else %}
+                    <div class="row">
+                        <div class="col justify-content-center">
+                            <br>
+                            <br>
+                            <h3>No existen registros en el momento</h3>
+                        </div>
+                    </div>
+                    {% endif %}
+                </table>
+        </div>
+    
+    </div>
+    
+
+{% endblock contenido %}
+    

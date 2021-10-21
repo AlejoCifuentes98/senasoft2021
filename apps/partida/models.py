@@ -17,7 +17,6 @@ tipo_turno = (
 
 #Modelo para almacenar los jugadores de la partida    
 class Jugador(models.Model):
-    nombre = models.CharField(max_length=100)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.nombre
@@ -34,9 +33,9 @@ class Partida(models.Model):
 
 class Registro(models.Model):
     jugador_numero = models.CharField(max_length=20, choices=jugador_num)
+    cartas = models.CharField(max_length=20, null=True, blank=True)
     jugador = models.ForeignKey(Jugador, on_delete=models.PROTECT) #llave foranea de la tabla Jugador
     partida = models.ForeignKey(Partida, on_delete=models.PROTECT) #llave foranea de la tabla Partida
-    cartas = models.CharField(max_length=20, null=True, blank=True)
     def __str__(self):
         return self.jugador.nombre + ' ' +self.partida.codigo + ' ' + self.jugador_numero
 
