@@ -83,34 +83,39 @@ def partida_ingresar_view(request):
         form_i=ingresar_partida_form(request.POST) #formulario para ingresar el codigo de la partida
         if form_i.is_valid():
             codigo = form_i.cleaned_data['codigo'] #Captura codigo
-            try:
-                partida = Partida.objects.get(codigo_ingreso=codigo)
-                if Registro.objects.filter(jugador=request.user.id, partida__codigo_ingreso=codigo).exists():
-                    mensaje='no se puede mi rey'
-                else:
-                    registrados = Registro.objects.filter(partida=partida).count()
-                    r = Registro()
-                    r.jugador=jugador
-                    r.partida = partida
+            try: #errores personalizados
+                partida = Partida.objects.get(codigo_ingreso=codigo)#se valida que el codigo exista
+                if Registro.objects.filter(jugador=request.user.id, partida__codigo_ingreso=codigo).exists(): #Comparar que el usuario actual no esté vinculado a al mismo codigo más de una vez
+                    mensaje='Ya te encuentras en ésta partida' #Si ya está vinculado a la partida, se muestra el error.
+                else: #Si no está vinculado se genera un nuevo registro
+                    registrados = Registro.objects.filter(partida=partida).count()#se cuentan los usuarios que ya estan registrados en la partida
+                    r = Registro()#se crea un objeto
+                    r.jugador=jugador #Se pasa el jugador logueado actualmente
+                    r.partida = partida #Se pasa la partidsa a la que se va a vincular
+                    
+                    #Condicional para asignar el numero del jugador
                     if registrados == 1:
                         r.jugador_numero= 'jugador 2'
                     elif registrados == 2:
                         r.jugador_numero= 'jugador 3'    
                     elif registrados ==3:    
                         r.jugador_numero= 'jugador 4'
-                    if registrados <=4:       
+
+                    #Condicional para guardar maximo 4 jugadores    
+                    if registrados <=4: #si el numero de jugadores es meno o igual a 4 se puieden guardar los registros       
                         r.save() 
                     else:
-                        jsm='Lo sentimos, estamos completos'
+                        jsm='La partida ya cuenta con los 4 jugadores, no puedes ingresar' #Si es mayor a 4 se muestra el error
             except:
-                msj =('Codigo no valido')
+                msj =('Codigo no valido') #Si el codigo no es valido, se muestra el error
 
     else:
         form_i=ingresar_partida_form()
     return render(request, 'partida/partida_ingresar.html',locals())
 
-def partida_view(request):
+def partida_view(request, id_partida ):
     jugador = User.objects.get(jugador=request.user.id)
+    partida = Partida.objects.get(id = id_partida)
     # registro = Registro.object.get(jugador = jugador)
     return render(request, 'partida/partida.html')
 
