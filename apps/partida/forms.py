@@ -1,13 +1,15 @@
 from django import forms
-from apps.partida.models import Partida, Jugador
+from apps.partida.models import Partida, Jugador, Turno
+from apps.cartas.models import Cartas
 from django.contrib.auth.models import User
-
+tipo_turno = (
+    ('preguntar','preguntar'),
+    ('acusar','acusar'),)
 class jugador_form(forms.ModelForm):
     class Meta:
         model = Jugador
         fields = '__all__'
         exclude =['usuario']
-
 
 class crear_partida_form(forms.ModelForm):
    class Meta:
@@ -44,3 +46,8 @@ class ingresar_partida_form(forms.Form):
     nombre = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     codigo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
         
+class turno_form(forms.Form):
+    desa = forms.ModelChoiceField(label='Desarrollador',queryset= Cartas.objects.filter(tipo__nombre = "dev"))
+    erro = forms.ModelChoiceField(label='Error',queryset= Cartas.objects.filter(tipo__nombre = "err"))
+    modu = forms.ModelChoiceField(label='Modulo',queryset= Cartas.objects.filter(tipo__nombre = "mod"))
+    tipo = forms.ChoiceField(choices=tipo_turno, label='Tipo de jugada')
