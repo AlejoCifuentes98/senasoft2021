@@ -1,17 +1,40 @@
+
+
+
+
 {% extends 'base.html' %}
 
+{% load static %}
+
+
+{% block navbar %}
+    {% include 'partida/navbar.html' %}
+
+{% endblock navbar %}
+    
+
+    
 {% block contenido %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{form_r.as_p}}
-    <input type="submit" value="Crear cuenta">
-</form>
-<div class="container mt-4">
-    <div class="row">
-        <div class="col">
-            <p> ¿Ya tienes cuenta?</p>
-            <a href="{% url 'login'%}">Inicia sesion</a>
-        </div>
+<br><br><br><br>
+<div class="row">
+    <div class="col-3"></div> 
+    <div class="card col-md-6 ">
+         <div class="card">
+            <h1 class="image_1">Registro de usuario</h1>
+        <form  class="" action="" method="post" >
+            {% csrf_token %}
+            {{ form_r.as_p}}
+            <input class="shop_bt_2 a:hover" type="submit" value="Ingresar">
+        </form>
+        
+    </div>
+    <div class="col">
+        <br>
+        <h3> ¿Ya tienes cuenta?</h3><br>
+        <a class="btn btn-primary" href="{% url 'login'%}">Inicia sesion</a>
     </div>
 </div>
+</div>
+
+
 {% endblock contenido %}

@@ -1,7 +1,42 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block contenido %}
-    <a class="btn btn-primary" href="{% url 'registro' %}"> Registrarse</a>
-    <a class="btn btn-primary" href="{% url 'login' %}"> Ingresar</a>
+<div class="banner_section layout_padding">
+
+    <div class="header content">
+      <div class="header-video">
+        <video class="vid" muted autoplay loop width="1980" height="1400">
+          <source src="{% static 'img/p2.mp4' %}">
+        </video>
+      </div>
+      <div class="header-content">
+        <!--<h1>SenaSoft 2021</h1>-->
+        <div class="container">
+          <div class="row">
+            <div class="container">
+              <div class="col-md-12">
+                <div class="image_1"><img src="{% static 'img/logblancoblanco.png' %}"></div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <a  class="shop_bt"  href="{% url 'registro' %}"> Registrarse</a>
+
+                    <a class="shop_bt_2 a:hover" href="{% url 'login' %}"> Ingresar</a>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
 {% endblock contenido %}
-    
