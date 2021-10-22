@@ -38,9 +38,9 @@ class ingresar_partida_form(forms.Form):
     codigo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 class registro_form(forms.Form):
-    username   = forms.CharField(label='Nombre de usuario', widget=forms.TextInput)
-    clave_1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(render_value=False))
-    clave_2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput(render_value=False))
+    username   = forms.CharField(label='Nombre de usuario', widget=forms.TextInput (attrs={'class':'form-control'}))
+    clave_1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    clave_2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -59,5 +59,5 @@ class registro_form(forms.Form):
             raise forms.ValidationError('Las contraseñas no coinciden, intente de nuevo')
 
 class login_form(forms.Form):
-    username   = forms.CharField(label='Usuario', widget=forms.TextInput)
-    clave = forms.CharField(label='Contraseña', widget=forms.PasswordInput(render_value=False))
+    username   = forms.CharField(label='Usuario', widget=forms.TextInput(attrs={'class':'form-control'}))
+    clave = forms.CharField(label='Contraseña', widget=forms.PasswordInput (attrs={'class':'form-control'}, render_value=False))
