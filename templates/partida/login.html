@@ -1,3 +1,7 @@
+
+
+
+
 {% extends 'base.html' %}
 
 {% load static %}
@@ -11,18 +15,23 @@
 
     
 {% block contenido %}
-<br>
+<br><br><br><br>
 <div class="row">
- 
     <div class="col-3"></div> 
     <div class="card col-md-6 ">
          <div class="card">
-            <h1 class="text-justify">Inicio de sesión</h1>
+            <h1 class="image_1">Iniciar sesión</h1>
         <form  class="" action="" method="post" >
             {% csrf_token %}
             {{ form_l.as_p}}
             <input class="shop_bt_2 a:hover" type="submit" value="Ingresar">
         </form>
+        
+    </div>
+    <div class="col">
+        <br>
+        <h3> ¿No tienes cuenta?</h3>
+        <a class="btn btn-primary" href="{% url 'registro'%}">Registrarse</a>
     </div>
 </div>
 </div>

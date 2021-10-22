@@ -2,14 +2,15 @@
 
 
 {% block contenido %}
+<br><br>
     <div class="container">
         <h1> Bienvenido(a) <strong>{{jugador.username}}</strong></h1>
         <br>
-        <h3> qué deseas hacer?</h3>
+        <h3> Qué deseas hacer?</h3>
         <br>
-        <div class="d-grid gap-2 d-md-block">
-            <a type="button" class="btn btn-primary" href="{% url 'partida_crear' %}">crear partida</a>
-            <a type="button" class="btn btn-primary" href="{% url 'partida_ingresar' %}">Unirse a partida</a>
+        <div class="row">
+            <a type="button" class="shop_bt" href="{% url 'partida_crear' %}">Crear partida</a>
+            <a type="button" class="shop_bt_2 a:hover" href="#">Unirse a partida</a>
            
         </div>
     </div>
@@ -50,7 +51,7 @@
                     <div class="row">
                         <div class="col justify-content-center">
                             <br>
-                            <br>
+                            
                             <h3>No existen registros en el momento</h3>
                         </div>
                     </div>
