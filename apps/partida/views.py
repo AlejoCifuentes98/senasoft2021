@@ -94,17 +94,21 @@ def partida_ingresar_view(request):
                     #Condicional para asignar el numero del jugador
                     if registrados == 1:
                         r.jugador_numero= 'jugador 2'
+                        r.save()
                     elif registrados == 2:
                         r.jugador_numero= 'jugador 3'    
+                        r.save()
                     elif registrados ==3:    
                         r.jugador_numero= 'jugador 4'
-
                     #Condicional para guardar maximo 4 jugadores    
-                    if registrados <=4: #si el numero de jugadores es meno o igual a 4 se puieden guardar los registros       
                         r.save()
-                        return redirect('/perfil/') 
-                    else:
+                    if registrados == 4: #si el numero de jugadores es menor o igual a 4 se puieden guardar los registros       
                         err_partida='La partida ya cuenta con los 4 jugadores, no puedes ingresar' #Si es mayor a 4 se muestra el error
+                        return render(request,'partida/partida_ingresar.html', locals())
+                        #return redirect('/perfil/')
+                    else:
+                        err_partida='otro error' #Si es mayor a 4 se muestra el error
+                    return render(request,'partida/partida_ingresar.html', locals())
             except:
                 err_codigo =('Codigo no valido') #Si el codigo no es valido, se muestra el error
 
@@ -113,11 +117,12 @@ def partida_ingresar_view(request):
     return render(request, 'partida/partida_ingresar.html',locals())
 
 def partida_detalle_view(request, id_partida):
+    usuario = User.objects.get(id=request.user.id)
     partida =Partida.objects.get(id=id_partida)
     registros = Registro.objects.filter(partida=partida)
-    jugador = Registro.objects.get(jugador=request.user.id)
+    jugador = Registro.objects.get(jugador=usuario)
     contador = registros.count()
-    return render(request, 'partida/partida_detalle.html', locals())
+    return render(request, 'partida/partida_detalle.html',locals())
 
 def partida_view(request, id_partida):
     jugador = User.objects.get(jugador=request.user.id)
@@ -127,9 +132,10 @@ def partida_view(request, id_partida):
     return render(request, 'partida/partida.html')
 
 def preguntar_view(request):
+    
     return render(request, 'partida/preguntar.html')
 
 def acusar_view(request):
-
+    
     return render(request, 'partida/acusar.html')
 

@@ -12,6 +12,7 @@ jugador_num = (
 #Choices para los tipos de turnos
 tipo_turno = (
     ('Preguntar','Preguntar'),
+    ('En espera','En espera'),
     ('Acusar','Acusar'),
 )
 

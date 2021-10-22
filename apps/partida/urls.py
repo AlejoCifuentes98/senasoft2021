@@ -16,5 +16,4 @@ urlpatterns = [
     path('partida/', partida_view, name='partida'),
     path('preguntar/', preguntar_view, name='preguntar'),
     path('acusar/', acusar_view, name='acusar'),
-
 ]

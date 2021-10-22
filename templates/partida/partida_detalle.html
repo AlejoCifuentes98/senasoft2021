@@ -1,31 +1,44 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<h3>Hola <strong>{{ jugador.User.username}}</strong></h3>
-<p>Tu codigo para que otros jugadores se puedan unir a la partida es el siguiente <strong> {{
-        registros.partida.codigo_ingreso }}</strong></p>
+<h3>Hola <strong>{{ jugador.jugador.username}}</strong></h3>
+<br>
+<h5>Tu codigo para que otros jugadores se puedan unir a la partida es el siguiente: <strong>
+        {{jugador.partida.codigo_ingreso }}</strong></h5>
+<br>
 <div class="row">
     <div class="col">
-        <a class="btn btn-primary" href="#">Volver a perfil</a>
+        <a class="btn btn-primary" href="{% url 'perfil'%}">Volver a perfil</a>
     </div>
 </div>
+
 <div class="row mt-4">
     <div class="col">
+
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Numero de jugador</th>
-                    <th scope="col">Nombre de jugador</th>
+                    <th scope="col">Numero del jugador</th>
+                    <th scope="col">Nombre del jugador</th>
+
+
                 </tr>
             </thead>
+
             {% if registros %}
             <tbody>
+
+
                 {% for i in registros %}
+
                 <tr>
                     <th scope="row">{{ i.jugador_numero }}</th>
                     <td>{{ i.jugador.username }}</td>
+
+
                 </tr>
                 {% endfor %}
+
             </tbody>
             {% else %}
             <div class="row">
