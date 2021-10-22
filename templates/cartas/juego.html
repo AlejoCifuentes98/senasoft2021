@@ -6,6 +6,7 @@
     <div class="col col-5">
         {{ request.user }}
     </div>
+    
     <div class="col-7">
         <div class="row">
             <div class="col-2">
@@ -82,10 +83,12 @@
         <form action="" method="POST">
             {% csrf_token %}
             {{form_t.as_p}}
-            <input type="submit" value="Jugar">
+            <input type="submit" onclick="timeout()" value="Jugar">
         </form>
     </div>
     <!-- fin formulario -->
+    
+    
 </div>
 
 

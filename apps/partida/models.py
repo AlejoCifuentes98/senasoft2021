@@ -11,13 +11,20 @@ jugador_num = (
 
 #Choices para los tipos de turnos
 tipo_turno = (
+    ('Preguntar','Preguntar'),
+    ('Acusar','Acusar'),
+)
+
+estado_turno = (
     ('activo','activo'),
     ('en espera','en espera'),
     ('finalizado','finalizado'),
 )
 
-partida_estado =(
+partida_estado =( 
     ('activa', 'activa'),
+    ('en espera', 'en espera'),
+    ('iniciada', 'iniciada'),
     ('finalizada', 'finalizada'),
 )
 
@@ -54,10 +61,14 @@ class Turno(models.Model):
     respuesta_jugador_3 = models. PositiveIntegerField(null=True, blank=True)
 
     jugador_pregunta = models.PositiveIntegerField() 
-    jugador_responde = models.PositiveIntegerField()
-    tipo = models.CharField(max_length=20, choices=tipo_turno)
+    jugador_responde = models.PositiveIntegerField() #id que responde
+    tipo = models.CharField(max_length=20, choices=tipo_turno) # pregunta o acusa
+    
+    estado = models.CharField(max_length=20, choices=estado_turno, null=True, blank=True) # estado del turno finaliza con el j4
+    jugador = models.CharField(max_length= 50, choices=jugador_num, null=True, blank=True) # jugador que esta respondiendo j2
 
     registro =models.ForeignKey(Registro, on_delete=models.PROTECT)
+
     def __str__(self):
         return self.registro.jugador.nombre+ ' '+self.carta_des+' '+self.carta_mod+' '+self.carta_err
 
@@ -90,7 +101,6 @@ class Tablero(models.Model):
     carta_err_5 = models.CharField(max_length=50, null=True, blank=True)
     carta_err_6 = models.CharField(max_length=50, null=True, blank=True)
     
-    def __str__(self):
-        return self.registro.jugador.nombre
+    
 
       
