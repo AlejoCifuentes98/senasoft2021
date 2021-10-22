@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+<!-- simulacion cartas ocultas -->
+<div class="row">
+    <div class="col col-5">
+        {{ request.user }}
+    </div>
+    <div class="col-7">
+        <div class="row">
+            <div class="col-2">
+                <img src="{% static 'img/carta.png' %}" width="200" height="320" alt="">
+            </div>
+            <div class="col-2">
+                <img src="{% static 'img/carta.png' %}" width="200" height="320" alt="">
+            </div>
+            <div class="col-2">
+                <img src="{% static 'img/carta.png' %}" width="200" height="320" alt="">
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="row">
+    <h3>Mis Tarjetas</h3>
+    {% for c in cartas %}
+        <p>
+            <img src="/media/{{ c.imagen }}" height="60px" alt="">
+            {{ c }}
+        </p>
+    {% endfor %}
+        
+</div>
+
+<!-- fin simulacion cartas ocultas -->
+    <div class="row">
+        <div class="col-4">
+        <table >
+            <thead>
+                <tr>
+                    <th>Quien</th>
+                    <th>Notas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for des in lista_desarrollador %}
+                    <tr>
+                        <td>{{des.nombre}}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                
+                    <tr>
+                        <td><b>Modulo</b></td>
+                        <td></td>
+                    </tr>
+                {% for mod in lista_modulo%}
+                    <tr>
+                        <td>{{mod}}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                    <tr>
+                        <td><b>Tipo de error</b></td>
+                        <td></td>
+                    </tr>
+                {% for err in lista_error%}
+                    <tr>
+                        <td>{{err}}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    {% if mensaje %}
+        <h1>{{mensaje}}</h1>
+    {% endif %}
+    <!-- inicio formulario -->
+    <div class="col-6">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form_t.as_p}}
+            <input type="submit" value="Jugar">
+        </form>
+    </div>
+    <!-- fin formulario -->
+</div>    
+{% endblock contenido %}
+    

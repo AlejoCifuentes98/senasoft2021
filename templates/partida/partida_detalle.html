@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h3>Hola <strong>{{ jugador.User.username}}</strong></h3>
+<p>Tu codigo para que otros jugadores se puedan unir a la partida es el siguiente <strong> {{
+        registros.partida.codigo_ingreso }}</strong></p>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-primary" href="#">Volver a perfil</a>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Numero de jugador</th>
+                    <th scope="col">Nombre de jugador</th>
+                </tr>
+            </thead>
+            {% if registros %}
+            <tbody>
+                {% for i in registros %}
+                <tr>
+                    <th scope="row">{{ i.jugador_numero }}</th>
+                    <td>{{ i.jugador.username }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% else %}
+            <div class="row">
+                <div class="col justify-content-center">
+                    <br>
+                    <br>
+                    <h3>No existen registros en el momento</h3>
+                </div>
+            </div>
+            {% endif %}
+        </table>
+    </div>
+
+</div>
+{% if jugador.jugador_numero == 'jugador 1' %}
+{% if contador == 4 %}
+<div class="row">
+    <div class="col">
+        <a class="btn btn-primary" href="{% url 'partida_play' id_partida=partida.id %}">Iniciar partida</a> 
+    </div>
+</div>
+{% else %}
+<p>Esperando completar los 4 jugadores</p>
+{% endif %}
+{% else %}
+<h2>Espere que el jugador 1 inicie la partida</h2>
+{% endif %}
+
+{% endblock contenido %}
+     

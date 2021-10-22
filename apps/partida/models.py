@@ -11,8 +11,8 @@ jugador_num = (
 
 #Choices para los tipos de turnos
 tipo_turno = (
-    ('preguntar','preguntar'),
-    ('acusar','acusar'),
+    ('Preguntar','Preguntar'),
+    ('Acusar','Acusar'),
 )
 
 partida_estado =(
@@ -34,11 +34,11 @@ class Partida(models.Model):
 
 class Registro(models.Model):
     jugador_numero = models.CharField(max_length=20, choices=jugador_num)
-    cartas = models.CharField(max_length=20, null=True, blank=True)
+    cartas = models.CharField(max_length=20, null=True, blank=True) #lista de cartas del jugador x
     jugador = models.ForeignKey(User, on_delete=models.PROTECT) #llave foranea de la tabla Jugador
     partida = models.ForeignKey(Partida, on_delete=models.PROTECT) #llave foranea de la tabla Partida
     def __str__(self):
-        return self.jugador.nombre + ' ' +self.partida.codigo + ' ' + self.jugador_numero
+        return self.jugador.username + ' ' +self.partida.codigo_ingreso + ' ' + self.jugador_numero
 
 #Modelo de Turnos
 class Turno(models.Model):
