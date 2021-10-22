@@ -4,7 +4,14 @@
 <form action="" method="post">
     {% csrf_token %}
     {{form_r.as_p}}
-    <input type="submit" value="Ingresar">
+    <input type="submit" value="Crear cuenta">
 </form>
-
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <p> ¿Ya tienes cuenta?</p>
+            <a href="{% url 'login'%}">Inicia sesion</a>
+        </div>
+    </div>
+</div>
 {% endblock contenido %}

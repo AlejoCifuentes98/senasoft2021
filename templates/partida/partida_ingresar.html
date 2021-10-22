@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form_i.as_p}}
-        
-       <button class="btn btn-primary" type="submit" >Ingresar</button>
-    </form>
-    {%if err_validacion %} <!--Pintar error-->
-        <p>{{err_validacion}}</p>
-    {% endif %}    
-    {%if err_codigo %}
-        <p>{{err_codigo}}</p>
-    {% endif %}    
-    {%if err_partida %}
-        <p>{{err_partida}}</p>
-    {% endif %}    
+<br>
+<br>
+
+{% if err_partida %}
+    <h2>{{ err_partida }}</h2>    
+{% endif %}
     
+<div class="row">
+    <div class="col">
+        <a class="btn btn-danger" href="{% url 'perfil'%}">Volver a perfil</a>
+    </div>
+</div>
+
+<br>
+<br>
+<form action="" method="post">
+    {% csrf_token %}
+    {{form_i.as_p}}
+
+    <button class="btn btn-primary" type="submit">Unirse</button>
+</form>
+
+
+{%if err_validacion %}
+<!--Pintar error-->
+<p>{{err_validacion}}</p>
+{% endif %}
+{%if err_codigo %}
+<p>{{err_codigo}}</p>
+{% endif %}
+{%if err_partida %}
+<p>{{err_partida}}</p>
+{% endif %}
+
 {% endblock contenido %}
-    
