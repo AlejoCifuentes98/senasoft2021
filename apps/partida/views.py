@@ -11,7 +11,6 @@ from random import randint # Funcion para generar los hexadecimales
 def inicio_view(request):
     return render(request, 'partida/inicio.html',locals())
 
-
 def partida_crear_view(request):
     #Vista para crear partida
     jugador = User.objects.get(id=request.user.id) #Consulta el usuario conectado actualmente
@@ -26,7 +25,6 @@ def partida_crear_view(request):
     Registro.objects.create(jugador_numero='jugador 1', jugador=jugador, partida=partida )
     return redirect('/perfil/')
     
-
 def registro_view(request):
     #seccion para crear una cuenta
     if request.method == 'POST':
@@ -128,9 +126,6 @@ def partida_detalle_view(request, id_partida):
     jugador = Registro.objects.get(jugador=usuario)
     contador = registros.count()
 
-    
-
-    
     return render(request, 'partida/partida_detalle.html',locals())
 
 def partida_view(request, id_partida):
@@ -148,20 +143,3 @@ def acusar_view(request):
     
     return render(request, 'partida/acusar.html')
 
-def turnos_view(request):
-    #jugador= Jugador.objects.get(jugador=id_jugador)
-    if request.method =='POST':
-        form_t=turno_form(request.POST)
-        if form_t.is_valid():
-            des = form_t.cleaned_data['desa']
-            err = form_t.cleaned_data['erro']
-            mod = form_t.cleaned_data['modu']
-            # Turno.objects.create(
-            #     carta_des=des.id, 
-            #     carta_err=err.id, 
-            #     carta_mod=mod.id,
-            #     #jugador_pregunta= jugador.id,
-            #     )
-    else:
-        form_t=turno_form()
-    return render(request, 'partida/prueba.html', locals())

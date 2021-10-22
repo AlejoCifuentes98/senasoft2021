@@ -42,7 +42,7 @@ class Partida(models.Model):
 
 class Registro(models.Model):
     jugador_numero = models.CharField(max_length=20, choices=jugador_num)
-    cartas = models.CharField(max_length=20, null=True, blank=True)
+    cartas = models.CharField(max_length=20, null=True, blank=True) #lista de cartas del jugador x
     jugador = models.ForeignKey(User, on_delete=models.PROTECT) #llave foranea de la tabla Jugador
     partida = models.ForeignKey(Partida, on_delete=models.PROTECT) #llave foranea de la tabla Partida
     def __str__(self):

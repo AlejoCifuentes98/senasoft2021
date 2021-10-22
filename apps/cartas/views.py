@@ -86,6 +86,11 @@ def juego_view(request, id_partida):
     lista_error = Cartas.objects.filter(tipo__nombre = "error")
     lista_desarrollador = Cartas.objects.filter(tipo__nombre = "desarrollador")
 
+    print("xxxxxxxxxxxxx")
+    print(partida.carta_des)
+    print("xxxxxxxxxxxxx")
+    print(partida.carta_err)
+    print(partida.carta_mod)
     lista = registro.cartas # '[1,4,5,6]'
 
     # Convirtiendo la cadena a lista
@@ -100,12 +105,29 @@ def juego_view(request, id_partida):
             des = form_t.cleaned_data['desa']
             err = form_t.cleaned_data['erro']
             mod = form_t.cleaned_data['modu']
+            tip = form_t.cleaned_data['tipo']
+            d = Cartas.objects.get(nombre=des)
+            e = Cartas.objects.get(nombre=err)
+            m = Cartas.objects.get(nombre=mod)
             Turno.objects.create(
-                carta_des=des.id, 
-                carta_err=err.id, 
-                carta_mod=mod.id,
-                jugador_pregunta= request.userid,
+                carta_des=d.id, 
+                carta_err=e.id, 
+                carta_mod=m.id,
+                jugador_pregunta= request.user.id,
+                jugador_responde= request.user.id,
+                tipo = tip,
+                registro = registro
                 )
+            
+            if tip == "Acusar":
+                if d.id==partida.carta_des and e.id==partida.carta_err and m.id==partida.carta_mod:
+                    mensaje = "Has ganado"
+                    partida.estado = "finalizada"
+                    partida.save()
+                else:
+                    mensaje= "Acusación erroneo, has perdido el turno"
+            if mod == "Preguntar":
+                pass
     else:
         form_t=turno_form()
     return render(request, 'cartas/juego.html', locals())

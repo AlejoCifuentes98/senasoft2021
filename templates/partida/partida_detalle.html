@@ -48,7 +48,6 @@
                     <h3>No existen registros en el momento</h3>
                 </div>
             </div>
-
             {% endif %}
         </table>
     </div>
@@ -59,17 +58,16 @@
 <div class="row">
     <div class="col">
         <a class="btn btn-primary" href="{% url 'partida_play' id_partida=partida.id%}">Iniciar partida</a>
+
     </div>
 </div>
 {elif}
 {% else %}
-<h2>Esperando completar los 4 jugadores</h2>
+<p>Esperando completar los 4 jugadores</p>
 {% endif %}
 {% else %}
-<h2>Espera a que el jugador 1 empiece la partida</h2>
+<h2>Espere que el jugador 1 inicie la partida</h2>
 {% endif %}
 
-
-
 {% endblock contenido %}
-
+     

@@ -2,9 +2,9 @@ from django import forms
 from .models import Cartas
 
 tipo_turno = (
-    ('preguntar','preguntar'),
-    ('acusar','acusar'),)
-    
+    ('Preguntar','Preguntar'),
+    ('Acusar','Acusar'),)
+
 class turno_form(forms.Form):
     desa = forms.ModelChoiceField(label='Desarrollador',queryset= Cartas.objects.filter(tipo__nombre = "desarrollador"))
     erro = forms.ModelChoiceField(label='Error',queryset= Cartas.objects.filter(tipo__nombre = "error"))
