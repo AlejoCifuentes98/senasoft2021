@@ -10,11 +10,12 @@ CardBug es un juego web de cartas que trata de adivinar quien fue culpable del d
 La arquitectura es cliente servidor
 
 ##Requerimientos
-asgiref==3.4.1
-Django==3.2.8
-Pillow==8.4.0
-pytz==2021.3
-sqlparse==0.4.2
+- asgiref==3.4.1
+- Django==3.2.8
+- Pillow==8.4.0
+- pytz==2021.3
+- sqlparse==0.4.2
+
 ##Como instalar
 - Primero escribir esta line en el cmd: 
  docker build --tag Juego-CardBug
