@@ -58,10 +58,10 @@
 {% if contador == 4 %}
 <div class="row">
     <div class="col">
-        <form action="" method="post"></form>
         <a class="btn btn-primary" href="{% url 'partida_play' id_partida=partida.id%}">Iniciar partida</a>
     </div>
 </div>
+{elif}
 {% else %}
 <h2>Esperando completar los 4 jugadores</h2>
 {% endif %}
