@@ -1,19 +1,31 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+
+{% block navbar %}
+    {% include 'partida/navbar.html' %}
+
+{% endblock navbar %}
+    
+
+    
 {% block contenido %}
-<h3>{{ msj }}</h3>
-<form action="" method="post">
-    {% csrf_token %}
-    {{form_l.as_p}}
-    <input type="submit" value="Ingresar">
-</form>
-<div class="container mt-4">
-    <div class="row">
-        <div class="col">
-            <p> ¿No tienes un usuario?</p>
-            <a href="{% url 'registro'%}">Registrate</a>
-        </div>
+<br>
+<div class="row">
+ 
+    <div class="col-3"></div> 
+    <div class="card col-md-6 ">
+         <div class="card">
+            <h1 class="text-justify">Inicio de sesión</h1>
+        <form  class="" action="" method="post" >
+            {% csrf_token %}
+            {{ form_l.as_p}}
+            <input class="shop_bt_2 a:hover" type="submit" value="Ingresar">
+        </form>
     </div>
 </div>
+</div>
+
 
 {% endblock contenido %}
