@@ -1,7 +1,7 @@
 
 # Encuentra el Error
 
-El logo que hicimos para el proyecto fue:
+El logo que hicimos para el proyecto es:
 ![](https://github.com/AlejoCifuentes98/senasoft2021django/blob/frontend/static/img/logblancoblanco.png?raw=true)
 
 ##Que es CardBug
